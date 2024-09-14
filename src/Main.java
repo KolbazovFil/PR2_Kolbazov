@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -99,6 +102,37 @@ public class Main {
         }
         throw new IllegalArgumentException("Элемент не найден!");
     }
+    //------------------------------------------------------------------------------------------------------------------
+    // 11 задание
+    public static String toBinary(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("Число должно быть положительным!");
+        }
+        else {
+            return Integer.toBinaryString(num);
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    // 12 задание
+    public static boolean isDivisible(int dividend, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException("Делить на ноль нельзя!");
+        }
+        else {
+            return dividend % divisor == 0;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    // 13 задание
+    public static <T> T Element(List<T> list, int index) {
+        if (index < 0 || index >= list.size()) {        //возвращает список элементов, количество которых равно index, начиная с list
+            throw new IndexOutOfBoundsException("Индекс выходит за пределы списка!");
+        }
+        else {
+            return list.get(index);
+        }
+    }
+
 
 
     public static void main(String[] args) {
@@ -235,29 +269,57 @@ public class Main {
         for (int i = 0; i < size1; i++) {
             mass1[i] = sc.nextInt();
         }
-
         try {
             int index = ElMass(mass1, size1);
             System.out.println("Индекс элемента: " + index);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-
         //--------------------------------------------------------------------------------------------------------------
         System.out.println("\nЗадача 11: Конвертация в двоичную систему");
-        System.out.println("Условие: Создайте функцию, которая конвертирует целое число в двоичную строку. Если число отрицательное, " +
-                "выбрасывайте исключение.");
-
+        System.out.println("Условие: Создайте функцию, которая конвертирует целое число в двоичную строку. " +
+                "Если число отрицательное, выбрасывайте исключение.");
+        System.out.print("Введите число: ");
+        int num2 = sc.nextInt();
+        try {
+            String binary = toBinary(num2);
+            System.out.println("Двоичное представление: " + binary);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
         //--------------------------------------------------------------------------------------------------------------
         System.out.println("\nЗадача 12: Проверка делимости");
         System.out.println("Условие: Реализуйте функцию, которая принимает два числа и проверяет, делится ли первое число на второе. " +
                 "Если второе число равно нулю, выбрасывайте ArithmeticException.");
-
+        System.out.print("Введите первое число: ");
+        int num3 = sc.nextInt();
+        System.out.print("Введите второе число: ");
+        int num4 = sc.nextInt();
+        try {
+            boolean divisible = isDivisible(num3, num4);
+            System.out.println("Делится: " + divisible);
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
         //--------------------------------------------------------------------------------------------------------------
         System.out.println("\nЗадача 13: Чтение элемента списка");
-        System.out.println("Условие: Напишите функцию, которая возвращает элемент списка по индексу. Если индекс выходит за пределы списка, " +
-                "выбрасывайте IndexOutOfBoundsException.");
-
+        System.out.println("Условие: Напишите функцию, которая возвращает элемент списка по индексу. Если индекс выходит " +
+                "за пределы списка, выбрасывайте IndexOutOfBoundsException.");
+        System.out.print("Введите первое имя: ");
+        String name = sc.next();
+        System.out.print("Введите второе имя: ");
+        String name1 = sc.next();
+        System.out.print("Введите третье имя: ");
+        String name2 = sc.next();
+        System.out.println("Введите индекс: ");
+        int strlength2 = sc.nextInt();
+        try {
+            List<String> names = new ArrayList<>(Arrays.asList(name, name1, name2));
+            String name3 = Element(names, strlength2);
+            System.out.println("Имя: " + name3);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
         //--------------------------------------------------------------------------------------------------------------
         System.out.println("\nЗадача 14: Парольная проверка");
         System.out.println("Условие: Создайте функцию для проверки сложности пароля. Если пароль содержит менее 8 символов, " +
